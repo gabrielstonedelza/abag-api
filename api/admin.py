@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw
+
+admin.site.register(MobileMoneyUsersRegistration)
+admin.site.register(MobileMoneyDeposit)
+admin.site.register(MobileMoneyWithDraw)
