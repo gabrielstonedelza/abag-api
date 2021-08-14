@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from .serializers import MobileMoneyRegistrationSerializer, MobileMoneyDepositSerializer, MobileMoneyWithDrawSerializer
 from .models import MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw
 from rest_framework import viewsets, permissions, generics, status
@@ -52,3 +52,7 @@ def mobile_money_withdrawal(request):
         serializer.save(agent=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def abag_home(request):
+    return render(request, "users/abag_home.html")
