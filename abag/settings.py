@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['.africanbankersassociationofghana.com', '157.230.209.117', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.africanbankersassociationofghana.com', '143.198.185.169', 'localhost', '127.0.0.1']
 
 # Application definition
 
