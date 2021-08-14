@@ -44,7 +44,7 @@ class MobileMoneyUsersRegistration(models.Model):
 
     def get_photo(self):
         if self.photo:
-            return 'https://africanbankersassociationofghana.com/' + self.photo.url
+            return 'https://africanbankersassociationofghana.com' + self.photo.url
 
 
 class MobileMoneyDeposit(models.Model):
