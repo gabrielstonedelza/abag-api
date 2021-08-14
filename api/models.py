@@ -32,10 +32,6 @@ class MobileMoneyUsersRegistration(models.Model):
     def __str__(self):
         return self.name
 
-    def get_photo(self):
-        if self.photo:
-            return 'https://africanbankersassociationofghana.com' + self.photo.url
-
 
 class MobileMoneyDeposit(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)

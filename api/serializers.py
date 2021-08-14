@@ -8,8 +8,7 @@ class MobileMoneyRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MobileMoneyUsersRegistration
         fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'name', 'id_type', 'id_number', 'photo',
-                  'date_registered',
-                  'get_photo']
+                  'date_registered']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
