@@ -128,11 +128,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# for development
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# used for development
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
@@ -164,3 +166,17 @@ DJOSER = {
         'user': 'users.serializers.UserCreateSerializer'
     },
 }
+AWS_ACCESS_KEY_ID = 'Q54NCSO2PY6YJRJY2VHT'
+AWS_SECRET_ACCESS_KEY = 'tKEzMJ9yHf+Ic7TUFVIsdBafqYYacoPbPUXPFjigdQA'
+AWS_STORAGE_BUCKET_NAME = 'abag-space'
+AWS_S3_ENDPOINT_URL = 'https://nyc3.digitaloceanspaces.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'abag-static-folder'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'abag/static'),
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storag'
