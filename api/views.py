@@ -9,7 +9,7 @@ from users.permissions import IsOwnerOrReadOnly
 
 
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.AllowAny])
 def mobile_money_users(request):
     mm_users = MobileMoneyUsersRegistration.objects.all().order_by('-date_registered')
     serializer = MobileMoneyRegistrationSerializer(mm_users, many=True)
