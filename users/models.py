@@ -44,4 +44,4 @@ class Profile(models.Model):
 
     def get_profile_picture(self):
         if self.profile_pic:
-            return 'http://127.0.0.1' + self.profile_pic.url
+            return 'https://africanbankersassociationofghana.com/' + self.profile_pic.url
