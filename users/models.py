@@ -20,7 +20,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'username'
 
     def get_username(self):
-        return self.agent_code
+        return self.username
 
 
 class Profile(models.Model):
