@@ -14,7 +14,7 @@ letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
-    agent_code = models.CharField(max_length=8, unique=True)
+    agent_code = models.IntegerField(unique=True)
     phone = models.CharField(max_length=11, unique=True)
     REQUIRED_FIELDS = ['email', 'phone', 'username']
     USERNAME_FIELD = 'agent_code'
@@ -31,5 +31,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}"
-
-
