@@ -16,8 +16,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
     agent_code = models.IntegerField(unique=True)
     phone = models.CharField(max_length=11, unique=True)
-    REQUIRED_FIELDS = ['email', 'phone', 'username']
-    USERNAME_FIELD = 'agent_code'
+    REQUIRED_FIELDS = ['email', 'phone', 'agent_code']
+    USERNAME_FIELD = 'username'
 
     def get_username(self):
         return self.agent_code
