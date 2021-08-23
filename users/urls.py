@@ -6,8 +6,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
-    path("myprofile/", views.profile),
-    path("profile_update/", views.profile_update),
+    path("myprofile/<str:agent_code>/", views.profile),
+    path("profile_update/<str:agent_code>/", views.profile_update),
     path('password-reset/', auth_views.PasswordResetView.as_view(
                       template_name='users/password_reset.html'), name='password_reset'),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(

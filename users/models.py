@@ -14,20 +14,13 @@ letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
-    agent_code = models.IntegerField(unique=True)
-    phone = models.CharField(max_length=11, unique=True)
-    REQUIRED_FIELDS = ['email', 'phone', 'agent_code']
-    USERNAME_FIELD = 'username'
-
-    def get_username(self):
-        return self.username
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(DeUser, on_delete=models.CASCADE, related_name="profile_user")
-    full_name = models.CharField(max_length=150, default="New User")
-    profile_pic = models.ImageField(upload_to="profile_pics", blank=True, default='user.png')
+    agent_code = models.CharField(max_length=11, unique=True)
+    phone = models.CharField(max_length=15, unique=True)
     company_name = models.CharField(max_length=200)
+    full_name = models.CharField(max_length=150, default="Abag User")
+    REQUIRED_FIELDS = ['username', 'email', 'phone', 'company_name', 'full_name']
+    USERNAME_FIELD = 'agent_code'
 
-    def __str__(self):
-        return f"{self.user.username}"
+    def get_agent_code(self):
+        return self.agent_code
+

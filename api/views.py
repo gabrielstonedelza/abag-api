@@ -5,11 +5,9 @@ from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from users.permissions import IsOwnerOrReadOnly
 
 
 @api_view(['GET'])
-@permission_classes([permissions.AllowAny])
 def mobile_money_users(request):
     mm_users = MobileMoneyUsersRegistration.objects.all().order_by('-date_registered')
     serializer = MobileMoneyRegistrationSerializer(mm_users, many=True)
@@ -17,7 +15,6 @@ def mobile_money_users(request):
 
 
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
 def get_mobile_user(request, phone):
     mm_user = MobileMoneyUsersRegistration.objects.get(phone=phone)
     serializer = MobileMoneyRegistrationSerializer(mm_user, many=False)
@@ -25,7 +22,6 @@ def get_mobile_user(request, phone):
 
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
 def mobile_money_registration(request):
     serializer = MobileMoneyRegistrationSerializer(data=request.data)
     if serializer.is_valid():
@@ -35,7 +31,6 @@ def mobile_money_registration(request):
 
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
 def mobile_money_deposit(request):
     serializer = MobileMoneyDepositSerializer(data=request.data)
     if serializer.is_valid():
@@ -45,7 +40,6 @@ def mobile_money_deposit(request):
 
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
 def mobile_money_withdrawal(request):
     serializer = MobileMoneyWithDrawSerializer(data=request.data)
     if serializer.is_valid():
