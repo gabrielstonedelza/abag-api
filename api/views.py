@@ -5,6 +5,7 @@ from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from users.models import User
 
 
 @api_view(['GET'])
@@ -22,10 +23,11 @@ def get_mobile_user(request, phone):
 
 
 @api_view(['POST'])
-def mobile_money_registration(request):
+def mobile_money_registration(request, agent_code):
+    agent = User.objects.get(agent_code=agent_code)
     serializer = MobileMoneyRegistrationSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(agent=request.user)
+        serializer.save(agent=agent)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
