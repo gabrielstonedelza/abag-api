@@ -1,6 +1,7 @@
 from django.db import models
 from PIL import Image
 from django.conf import settings
+
 User = settings.AUTH_USER_MODEL
 
 NETWORK = (
@@ -26,11 +27,19 @@ class MobileMoneyUsersRegistration(models.Model):
     name = models.CharField(max_length=100, unique=True)
     id_type = models.CharField(max_length=100, choices=IDTYPE, default="Ghana National Card")
     id_number = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to="mobile_money_users")
     date_registered = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+
+class MobileMoneyUserId(models.Model):
+    agent = models.ForeignKey(User, on_delete=models.CASCADE)
+    mobile_user = models.ForeignKey(MobileMoneyUsersRegistration, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="mobile_money_users")
+
+    def __str__(self):
+        return self.mobile_user.name
 
 
 class MobileMoneyDeposit(models.Model):
