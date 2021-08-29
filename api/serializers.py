@@ -21,7 +21,7 @@ class MobileMoneyDepositSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MobileMoneyDeposit
-        fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'name', 'id_type', 'amount', 'date_deposited', ]
+        fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'other_phone', 'name', 'id_type', 'amount', 'date_deposited', ]
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
