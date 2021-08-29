@@ -34,19 +34,21 @@ def mobile_money_registration(request, agent_code):
 
 
 @api_view(['POST'])
-def mobile_money_deposit(request):
+def mobile_money_deposit(request, agent_code):
+    agent = User.objects.get(agent_code=agent_code)
     serializer = MobileMoneyDepositSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(agent=request.user)
+        serializer.save(agent=agent)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
-def mobile_money_withdrawal(request):
+def mobile_money_withdrawal(request, agent_code):
+    agent = User.objects.get(agent_code=agent_code)
     serializer = MobileMoneyWithDrawSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(agent=request.user)
+        serializer.save(agent=agent)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
