@@ -7,7 +7,7 @@ class MobileMoneyRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MobileMoneyUsersRegistration
-        fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'name', 'id_type', 'id_number', 'photo',
+        fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'name', 'id_type', 'id_number',
                   'date_registered']
         read_only_fields = ['agent']
 
