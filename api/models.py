@@ -1,6 +1,7 @@
 from django.db import models
 from PIL import Image
 from django.conf import settings
+from django.utils import timezone
 
 User = settings.AUTH_USER_MODEL
 
@@ -127,6 +128,7 @@ class Fraud(models.Model):
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=15)
     reason = models.TextField()
+    date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name
@@ -137,6 +139,7 @@ class MomoPay(models.Model):
     network = models.CharField(max_length=100, choices=NETWORK)
     phone = models.CharField(max_length=15)
     amount = models.IntegerField()
+    date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.phone

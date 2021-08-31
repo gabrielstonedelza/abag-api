@@ -9,4 +9,17 @@ urlpatterns = [
     path('mobile-money-deposit/<str:agent_code>/', views.mobile_money_deposit),
     path('mobile-money-withdraw/<str:agent_code>/', views.mobile_money_withdrawal),
     path('mobile-money-user/<str:phone>/', views.get_mobile_user),
+
+    #     agency banking
+    path('agency-banking-users/', views.agency_bank_users),
+    path('agency-banking-registration/<str:agent_code>/', views.agency_banking_registration),
+    path('agency-banking-deposit/<str:agent_code>/', views.agency_banking_deposit),
+    path('agency-banking-withdraw/<str:agent_code>/', views.agency_banking_withdrawal),
+    path('agency-banking-user/<str:phone>/', views.get_agency_user),
+
+    #  others
+    path('frauds/', views.frauds),
+    path('add-fraud/<str:agent_code>/', views.add_fraud),
+    path('momo-pay-users/', views.momo_pay_users),
+    path('add-momo-pay/<str:agent_code>/', views.add_momo_pay)
 ]

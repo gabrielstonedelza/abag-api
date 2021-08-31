@@ -90,7 +90,7 @@ class FraudSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fraud
-        fields = ['id', 'agent', 'agent_code', 'name', 'phone', 'reason']
+        fields = ['id', 'agent', 'agent_code', 'name', 'phone', 'reason', 'date_added']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
@@ -103,7 +103,7 @@ class MomoPaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MomoPay
-        fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'amount']
+        fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'amount', 'date_added']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
