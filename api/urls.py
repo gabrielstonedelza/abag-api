@@ -3,7 +3,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # normal request links
     path('', views.abag_home, name='index'),
+    path('register_success/', views.register_success, name="register_success"),
+    # api links
     path('mobile-money-users/', views.mobile_money_users),
     path('mobile-money-registration/<str:agent_code>/', views.mobile_money_registration),
     path('mobile-money-deposit/<str:agent_code>/', views.mobile_money_deposit),

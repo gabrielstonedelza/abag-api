@@ -4,8 +4,6 @@ from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from .permissions import IsOwnerOrReadOnly
-from django.shortcuts import get_object_or_404
 
 
 @api_view(['GET'])
