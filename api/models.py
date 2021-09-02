@@ -50,6 +50,7 @@ BANKS = (
 class AgencyBankingRegistration(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS, default="GT Bank")
+    account_number = models.CharField(max_length=200, default=0)
     phone = models.CharField(max_length=15)
     name = models.CharField(max_length=100, unique=True)
     id_type = models.CharField(max_length=100, choices=IDTYPE, default="Ghana National Card")
@@ -68,7 +69,6 @@ class AgencyBankingRegistration(models.Model):
 class AgencyBankingDeposit(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS)
-    account_number = models.CharField(max_length=200, default=0)
     phone = models.CharField(max_length=15)
     other_phone = models.CharField(max_length=15)
     name = models.CharField(max_length=100, unique=True)
@@ -83,7 +83,6 @@ class AgencyBankingDeposit(models.Model):
 class AgencyBankingWithDraw(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS)
-    account_number = models.CharField(max_length=200, default=0)
     phone = models.CharField(max_length=15)
     amount = models.FloatField()
     date_withdrew = models.DateTimeField(auto_now_add=True)
