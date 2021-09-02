@@ -18,7 +18,7 @@ urlpatterns = [
     path('agency-banking-registration/<str:agent_code>/', views.agency_banking_registration),
     path('agency-banking-deposit/<str:agent_code>/', views.agency_banking_deposit),
     path('agency-banking-withdraw/<str:agent_code>/', views.agency_banking_withdrawal),
-    path('agency-banking-user/<str:phone>/', views.get_agency_user),
+    path('agency-banking-account/<str:account_number>/', views.get_agency_account),
 
     #  others
     path('frauds/', views.frauds),

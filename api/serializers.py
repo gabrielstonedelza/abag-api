@@ -23,7 +23,7 @@ class AgencyBankingDepositSerializer(serializers.ModelSerializer):
     class Meta:
         model = AgencyBankingDeposit
         fields = ['id', 'agent', 'agent_code', 'bank', 'phone', 'other_phone', 'name', 'id_type', 'amount',
-                  'date_deposited']
+                  'date_deposited', 'account_number']
         read_only_fields = ['agent']
 
     def get_agent_code(self, agencydeposit):
@@ -36,7 +36,7 @@ class AgencyBankingWithDrawSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AgencyBankingWithDraw
-        fields = ['id', 'agent', 'agent_code', 'bank', 'phone', 'amount', 'date_withdrew', ]
+        fields = ['id', 'agent', 'agent_code', 'bank', 'phone', 'amount', 'date_withdrew', 'account_number' ]
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):

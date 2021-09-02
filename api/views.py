@@ -19,9 +19,9 @@ def agency_bank_users(request):
 
 
 @api_view(['GET'])
-def get_agency_user(request, phone):
-    ag_users = AgencyBankingRegistration.objects.get(phone=phone)
-    serializer = AgencyBankingSerializer(ag_users, many=False)
+def get_agency_account(request, account_number):
+    ag_account = AgencyBankingRegistration.objects.get(account_number=account_number)
+    serializer = AgencyBankingSerializer(ag_account, many=False)
     return Response(serializer.data)
 
 
