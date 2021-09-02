@@ -60,6 +60,10 @@ class AgencyBankingRegistration(models.Model):
     def __str__(self):
         return self.name
 
+    def get_photo(self):
+        if self.photo:
+            return "https://www.africanbankersassociationofghana.xyz" + self.photo.url
+
 
 class AgencyBankingDeposit(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -98,6 +102,10 @@ class MobileMoneyUsersRegistration(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_photo(self):
+        if self.photo:
+            return "https://www.africanbankersassociationofghana.xyz" + self.photo.url
 
 
 class MobileMoneyDeposit(models.Model):

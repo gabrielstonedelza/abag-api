@@ -9,7 +9,7 @@ class AgencyBankingSerializer(serializers.ModelSerializer):
     class Meta:
         model = AgencyBankingRegistration
         fields = ['id', 'agent', 'agent_code', 'bank', 'phone', 'name', 'id_type', 'id_number',
-                  'date_registered']
+                  'date_registered', 'get_photo', 'photo']
         read_only_fields = ['agent']
 
     def get_agent_code(self, agencyUser):
@@ -50,7 +50,7 @@ class MobileMoneyRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = MobileMoneyUsersRegistration
         fields = ['id', 'agent', 'agent_code', 'network', 'phone', 'name', 'id_type', 'id_number',
-                  'date_registered']
+                  'date_registered', 'get_photo', 'photo']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
