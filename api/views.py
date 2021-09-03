@@ -192,7 +192,7 @@ def register_success(request):
 
 @api_view(['GET'])
 def agent_momo_registrations(request, agent_code):
-    agent_code = User.objects.get(agent_code=agent_code)
+    # agent_code = User.objects.get(agent_code=agent_code)
     agent = MobileMoneyUsersRegistration.objects.filter(agent=agent_code)
     serializer = MobileMoneyRegistrationSerializer(agent, many=False)
     return Response(serializer.data)
