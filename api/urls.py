@@ -28,7 +28,7 @@ urlpatterns = [
     path('add-momo-pay/<str:agent_code>/', views.add_momo_pay),
 
     # agent transactions summary mobile money
-    path('momo-registration-summary/<str:agent>/', views.agent_momo_registrations),
+    path('momo-registration-summary/<str:agent_code>/', views.agent_momo_registrations),
     path('momo-deposit-summary/<str:agent>/', views.agent_momo_deposits),
     path('momo-withdraws-summary/<str:agent>/', views.agent_momo_withdraws),
     path('momo-pay-summary/<str:agent>/', views.agent_momo),
