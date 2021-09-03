@@ -70,7 +70,7 @@ class AgencyBankingDeposit(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS)
     phone = models.CharField(max_length=15)
-    other_phone = models.CharField(max_length=15)
+    other_account = models.CharField(max_length=15)
     name = models.CharField(max_length=100, unique=True)
     id_type = models.CharField(max_length=100, choices=IDTYPE)
     amount = models.FloatField()

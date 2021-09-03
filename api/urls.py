@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.abag_home, name='index'),
     path('register_success/', views.register_success, name="register_success"),
     # api links
+    path('deuser/<str:agent_code>/', views.get_deUser),
     path('mobile-money-users/', views.mobile_money_users),
     path('mobile-money-registration/<str:agent_code>/', views.mobile_money_registration),
     path('mobile-money-deposit/<str:agent_code>/', views.mobile_money_deposit),

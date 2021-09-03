@@ -22,7 +22,7 @@ class AgencyBankingDepositSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AgencyBankingDeposit
-        fields = ['id', 'agent', 'agent_code', 'bank', 'phone', 'other_phone', 'name', 'id_type', 'amount',
+        fields = ['id', 'agent', 'agent_code', 'bank', 'phone', 'other_account', 'name', 'id_type', 'amount',
                   'date_deposited']
         read_only_fields = ['agent']
 

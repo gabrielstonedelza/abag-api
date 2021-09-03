@@ -9,6 +9,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from users.models import User
 from users.forms import MobileMoneyForm, AgencyBankingForm
+from users.serializers import UsersSerializer
+
+
+@api_view(['GET'])
+def get_deUser(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    serializer = UsersSerializer(user, many=False)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
