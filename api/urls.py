@@ -25,5 +25,16 @@ urlpatterns = [
     path('frauds/', views.frauds),
     path('add-fraud/<str:agent_code>/', views.add_fraud),
     path('momo-pay-users/', views.momo_pay_users),
-    path('add-momo-pay/<str:agent_code>/', views.add_momo_pay)
+    path('add-momo-pay/<str:agent_code>/', views.add_momo_pay),
+
+    # agent transactions summary mobile money
+    path('momo-registration-summary/<str:agent>/', views.agent_momo_registrations),
+    path('momo-deposit-summary/<str:agent>/', views.agent_momo_deposits),
+    path('momo-withdraws-summary/<str:agent>/', views.agent_momo_withdraws),
+    path('momo-pay-summary/<str:agent>/', views.agent_momo),
+
+    # agent agency banking summary
+    path('agency-banking-registration-summary/<str:agent>/', views.agent_agency_banking_registrations),
+    path('agency-banking-deposit-summary/<str:agent>/', views.agent_agency_banking_deposits),
+    path('agency-banking-withdraws-summary/<str:agent>/', views.agent_agency_banking_withdraws),
 ]

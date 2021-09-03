@@ -111,16 +111,6 @@ def get_mobile_user(request, phone):
     return Response(serializer.data)
 
 
-# @api_view(['POST'])
-# def mobile_money_registration(request, agent_code):
-#     agent = User.objects.get(agent_code=agent_code)
-#     serializer = MobileMoneyRegistrationSerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save(agent=agent)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['POST'])
 def mobile_money_deposit(request, agent_code):
     agent = User.objects.get(agent_code=agent_code)
@@ -195,3 +185,52 @@ def agency_banking_registration(request, agent_code):
 
 def register_success(request):
     return render(request, "users/register_success.html")
+
+
+# agent mobile money transactions
+
+
+@api_view(['GET'])
+def agent_momo_registrations(request, agent):
+    agent = MobileMoneyUsersRegistration.objects.filter(agent=agent)
+    serializer = MobileMoneyRegistrationSerializer(agent, many=False)
+    return Response(serializer.data)
+
+
+def agent_momo_deposits(request, agent):
+    agent = MobileMoneyDeposit.objects.filter(agent=agent)
+    serializer = MobileMoneyDepositSerializer(agent, many=False)
+    return Response(serializer.data)
+
+
+def agent_momo_withdraws(request, agent):
+    agent = MobileMoneyWithDraw.objects.filter(agent=agent)
+    serializer = MobileMoneyWithDrawSerializer(agent, many=False)
+    return Response(serializer.data)
+
+
+def agent_momo(request, agent):
+    agent = MomoPay.objects.filter(agent=agent)
+    serializer = MomoPaySerializer(agent, many=False)
+    return Response(serializer.data)
+
+
+# agent agency banking transaction
+
+@api_view(['GET'])
+def agent_agency_banking_registrations(request, agent):
+    agent = AgencyBankingRegistration.objects.filter(agent=agent)
+    serializer = AgencyBankingSerializer(agent, many=False)
+    return Response(serializer.data)
+
+
+def agent_agency_banking_deposits(request, agent):
+    agent = AgencyBankingDeposit.objects.filter(agent=agent)
+    serializer = AgencyBankingDepositSerializer(agent, many=False)
+    return Response(serializer.data)
+
+
+def agent_agency_banking_withdraws(request, agent):
+    agent = AgencyBankingWithDraw.objects.filter(agent=agent)
+    serializer = AgencyBankingWithDrawSerializer(agent, many=False)
+    return Response(serializer.data)
