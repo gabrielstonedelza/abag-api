@@ -29,12 +29,12 @@ urlpatterns = [
 
     # agent transactions summary mobile money
     path('momo-registration-summary/<str:agent_code>/', views.agent_momo_registrations),
-    path('momo-deposit-summary/<str:agent>/', views.agent_momo_deposits),
-    path('momo-withdraws-summary/<str:agent>/', views.agent_momo_withdraws),
-    path('momo-pay-summary/<str:agent>/', views.agent_momo),
+    path('momo-deposit-summary/<str:agent_code>/', views.agent_momo_deposits),
+    path('momo-withdraws-summary/<str:agent_code>/', views.agent_momo_withdraws),
+    path('momo-pay-summary/<str:agent_code>/', views.agent_momo),
 
     # agent agency banking summary
-    path('agency-banking-registration-summary/<str:agent>/', views.agent_agency_banking_registrations),
-    path('agency-banking-deposit-summary/<str:agent>/', views.agent_agency_banking_deposits),
-    path('agency-banking-withdraws-summary/<str:agent>/', views.agent_agency_banking_withdraws),
+    path('agency-banking-registration-summary/<str:agent_code>/', views.agent_agency_banking_registrations),
+    path('agency-banking-deposit-summary/<str:agent_code>/', views.agent_agency_banking_deposits),
+    path('agency-banking-withdraws-summary/<str:agent_code>/', views.agent_agency_banking_withdraws),
 ]

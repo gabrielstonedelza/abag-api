@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import (MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw, AgencyBankingRegistration,
                      AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay)
+from users.models import User
 
 
 class AgencyBankingSerializer(serializers.ModelSerializer):

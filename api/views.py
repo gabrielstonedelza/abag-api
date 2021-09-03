@@ -192,46 +192,57 @@ def register_success(request):
 
 @api_view(['GET'])
 def agent_momo_registrations(request, agent_code):
-    # agent_code = User.objects.get(agent_code=agent_code)
-    agent = MobileMoneyUsersRegistration.objects.filter(agent=agent_code)
-    serializer = MobileMoneyRegistrationSerializer(agent, many=False)
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = MobileMoneyUsersRegistration.objects.filter(agent=user)
+    serializer = MobileMoneyRegistrationSerializer(agent, many=True)
     return Response(serializer.data)
 
 
-def agent_momo_deposits(request, agent):
-    agent = MobileMoneyDeposit.objects.filter(agent=agent)
-    serializer = MobileMoneyDepositSerializer(agent, many=False)
+@api_view(['GET'])
+def agent_momo_deposits(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = MobileMoneyDeposit.objects.filter(agent=user)
+    serializer = MobileMoneyDepositSerializer(agent, many=True)
     return Response(serializer.data)
 
 
-def agent_momo_withdraws(request, agent):
-    agent = MobileMoneyWithDraw.objects.filter(agent=agent)
-    serializer = MobileMoneyWithDrawSerializer(agent, many=False)
+@api_view(['GET'])
+def agent_momo_withdraws(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = MobileMoneyWithDraw.objects.filter(agent=user)
+    serializer = MobileMoneyWithDrawSerializer(agent, many=True)
     return Response(serializer.data)
 
 
-def agent_momo(request, agent):
-    agent = MomoPay.objects.filter(agent=agent)
-    serializer = MomoPaySerializer(agent, many=False)
+@api_view(['GET'])
+def agent_momo(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = MomoPay.objects.filter(agent=user)
+    serializer = MomoPaySerializer(agent, many=True)
     return Response(serializer.data)
 
 
 # agent agency banking transaction
 
 @api_view(['GET'])
-def agent_agency_banking_registrations(request, agent):
-    agent = AgencyBankingRegistration.objects.filter(agent=agent)
-    serializer = AgencyBankingSerializer(agent, many=False)
+def agent_agency_banking_registrations(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = AgencyBankingRegistration.objects.filter(agent=user)
+    serializer = AgencyBankingSerializer(agent, many=True)
     return Response(serializer.data)
 
 
-def agent_agency_banking_deposits(request, agent):
-    agent = AgencyBankingDeposit.objects.filter(agent=agent)
-    serializer = AgencyBankingDepositSerializer(agent, many=False)
+@api_view(['GET'])
+def agent_agency_banking_deposits(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = AgencyBankingDeposit.objects.filter(agent=user)
+    serializer = AgencyBankingDepositSerializer(agent, many=True)
     return Response(serializer.data)
 
 
-def agent_agency_banking_withdraws(request, agent):
-    agent = AgencyBankingWithDraw.objects.filter(agent=agent)
-    serializer = AgencyBankingWithDrawSerializer(agent, many=False)
+@api_view(['GET'])
+def agent_agency_banking_withdraws(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = AgencyBankingWithDraw.objects.filter(agent=user)
+    serializer = AgencyBankingWithDrawSerializer(agent, many=True)
     return Response(serializer.data)
