@@ -50,7 +50,7 @@ BANKS = (
 class AgencyBankingRegistration(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS, default="GT Bank")
-    account_number = models.CharField(max_length=200, default=0)
+    account_number = models.CharField(max_length=13, default=0)
     phone = models.CharField(max_length=15)
     name = models.CharField(max_length=100, unique=True)
     id_type = models.CharField(max_length=100, choices=IDTYPE, default="Ghana National Card")
