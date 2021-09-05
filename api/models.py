@@ -54,7 +54,7 @@ class AgencyBankingRegistration(models.Model):
     phone = models.CharField(max_length=15)
     name = models.CharField(max_length=100, unique=True)
     id_type = models.CharField(max_length=100, choices=IDTYPE, default="Ghana National Card")
-    id_number = models.CharField(max_length=100)
+    id_number = models.CharField(max_length=16)
     photo = models.ImageField(upload_to="agency_abanking", default="")
     date_registered = models.DateTimeField(auto_now_add=True)
 
@@ -97,7 +97,7 @@ class MobileMoneyUsersRegistration(models.Model):
     phone = models.CharField(max_length=15)
     name = models.CharField(max_length=100, unique=True)
     id_type = models.CharField(max_length=100, choices=IDTYPE, default="Ghana National Card")
-    id_number = models.CharField(max_length=100)
+    id_number = models.CharField(max_length=16)
     photo = models.ImageField(upload_to="mobile_money", default="")
     date_registered = models.DateTimeField(auto_now_add=True)
 
