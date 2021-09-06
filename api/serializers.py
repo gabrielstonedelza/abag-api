@@ -113,13 +113,18 @@ class MomoPaySerializer(serializers.ModelSerializer):
 
 
 class ChatMessageSerializer(serializers.ModelSerializer):
-    username = serializers.SerializerMethodField('get_sender')
+    sender_username = serializers.SerializerMethodField('get_sender_username')
+    receiver_username = serializers.SerializerMethodField('get_sender_username')
 
     class Meta:
         model = ChatMessage
-        fields = ['id', 'agent', 'username', 'message_id', 'message']
+        fields = ['id', 'agent', 'sender', 'receiver', 'sender_username', 'receiver_username', 'message_id', 'message']
         read_only_fields = ['agent', 'message_id']
 
-    def get_sender(self, user):
-        username = user.agent.username
-        return username
+    def get_sender_username(self, user):
+        sender_username = user.sender.username
+        return sender_username
+
+    def get_receiver_username(self, user):
+        receiver_username = user.receiver.username
+        return receiver_username
