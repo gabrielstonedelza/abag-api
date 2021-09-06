@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw, AgencyBankingRegistration,
-                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay)
+                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, ChatMessage)
 from users.models import User
 
 
@@ -110,3 +110,16 @@ class MomoPaySerializer(serializers.ModelSerializer):
     def get_agent_code(self, mm_user):
         agent_code = mm_user.agent.agent_code
         return agent_code
+
+
+class ChatMessageSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField('get_sender')
+
+    class Meta:
+        model = ChatMessage
+        fields = ['id', 'agent', 'username', 'message_id', 'message']
+        read_only_fields = ['agent', 'message_id']
+
+    def get_sender(self, user):
+        username = user.agent.username
+        return username

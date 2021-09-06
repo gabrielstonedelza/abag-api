@@ -37,4 +37,8 @@ urlpatterns = [
     path('agency-banking-registration-summary/<str:agent_code>/', views.agent_agency_banking_registrations),
     path('agency-banking-deposit-summary/<str:agent_code>/', views.agent_agency_banking_deposits),
     path('agency-banking-withdraws-summary/<str:agent_code>/', views.agent_agency_banking_withdraws),
+
+    # chat messages
+    path('chat/<str:message_id>/', views.get_chat_messages),
+    path('create_chat/', views.create_chat)
 ]

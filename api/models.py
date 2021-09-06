@@ -154,3 +154,13 @@ class MomoPay(models.Model):
 
     def __str__(self):
         return self.phone
+
+
+class ChatMessage(models.Model):
+    agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender", null=True)
+    message_id = models.CharField(max_length=20)
+    message = models.TextField()
+    date_messaged = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message

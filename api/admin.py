@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw, AgencyBankingRegistration,
-                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay)
+                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, ChatMessage)
 
 admin.site.register(MobileMoneyUsersRegistration)
 admin.site.register(MobileMoneyDeposit)
@@ -11,3 +11,4 @@ admin.site.register(AgencyBankingDeposit)
 admin.site.register(AgencyBankingWithDraw)
 admin.site.register(Fraud)
 admin.site.register(MomoPay)
+admin.site.register(ChatMessage)
