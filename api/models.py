@@ -8,12 +8,12 @@ User = settings.AUTH_USER_MODEL
 NETWORK = (
     ("MTN", "MTN"),
     ("VODAFONE", 'VODAFONE'),
-    ("AIRTEL TIGO", 'AIRTEL TIGO')
+    ("AIRTELTIGO", 'AIRTELTIGO')
 )
 
 IDTYPE = (
     ("Passport", "Passport"),
-    ("Voter's Id", "Voter's Id"),
+    ("Voters Id", "Voters Id"),
     ("Health Insurance", "Health Insurance"),
     ("Driving License", "Driving License"),
     ("Ghana National Card", "Ghana National Card"),
