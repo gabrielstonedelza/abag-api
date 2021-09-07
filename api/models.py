@@ -78,7 +78,7 @@ class AgencyBankingDeposit(models.Model):
     date_deposited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.beneficiary_name
 
 
 class AgencyBankingWithDraw(models.Model):
@@ -89,7 +89,7 @@ class AgencyBankingWithDraw(models.Model):
     date_withdrew = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.phone
+        return self.account_number
 
 
 class MobileMoneyUsersRegistration(models.Model):
