@@ -122,7 +122,7 @@ class MobileMoneyDeposit(models.Model):
     date_deposited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return self.beneficiary_name
 
 
 class MobileMoneyWithDraw(models.Model):
