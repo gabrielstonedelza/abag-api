@@ -12,4 +12,4 @@ class MobileMoneyForm(forms.ModelForm):
 class AgencyBankingForm(forms.ModelForm):
     class Meta:
         model = AgencyBankingRegistration
-        fields = ['bank', 'phone', 'name', 'id_type', 'id_number', 'photo']
+        fields = ['bank', 'account_number', 'phone', 'name', 'id_type', 'id_number', 'photo']
