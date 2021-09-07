@@ -69,10 +69,11 @@ class AgencyBankingRegistration(models.Model):
 class AgencyBankingDeposit(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS)
-    phone = models.CharField(max_length=15)
-    other_account = models.CharField(max_length=15)
-    name = models.CharField(max_length=100, unique=True)
-    id_type = models.CharField(max_length=100, choices=IDTYPE)
+    beneficiary_account_number = models.CharField(max_length=15)
+    beneficiary_name = models.CharField(max_length=100)
+    depositor_number = models.CharField(max_length=15)
+    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE)
+    depositor_id_number = models.CharField(max_length=16)
     amount = models.FloatField()
     date_deposited = models.DateTimeField(auto_now_add=True)
 
@@ -83,7 +84,7 @@ class AgencyBankingDeposit(models.Model):
 class AgencyBankingWithDraw(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS)
-    phone = models.CharField(max_length=15)
+    account_number = models.CharField(max_length=15)
     amount = models.FloatField()
     date_withdrew = models.DateTimeField(auto_now_add=True)
 
@@ -112,10 +113,11 @@ class MobileMoneyUsersRegistration(models.Model):
 class MobileMoneyDeposit(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     network = models.CharField(max_length=11, choices=NETWORK)
-    phone = models.CharField(max_length=15)
-    other_phone = models.CharField(max_length=15)
-    name = models.CharField(max_length=100, unique=True)
-    id_type = models.CharField(max_length=100, choices=IDTYPE)
+    beneficiary_phone = models.CharField(max_length=15)
+    beneficiary_name = models.CharField(max_length=100)
+    depositor_phone = models.CharField(max_length=15)
+    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE)
+    depositor_number = models.CharField(max_length=16)
     amount = models.FloatField()
     date_deposited = models.DateTimeField(auto_now_add=True)
 
