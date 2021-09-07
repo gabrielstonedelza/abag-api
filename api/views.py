@@ -166,12 +166,13 @@ def agency_banking_registration(request, agent_code):
         form = AgencyBankingForm(request.POST, request.FILES)
         if form.is_valid():
             bank = form.cleaned_data.get('bank')
+            account_number = form.cleaned_data.get('account_number')
             phone = form.cleaned_data.get('phone')
             name = form.cleaned_data.get('name')
             id_type = form.cleaned_data.get('id_type')
             id_number = form.cleaned_data.get('id_number')
             photo = form.cleaned_data.get('photo')
-            AgencyBankingRegistration.objects.create(agent=agent, bank=bank, phone=phone, name=name,
+            AgencyBankingRegistration.objects.create(agent=agent, bank=bank, account_number=account_number, phone=phone, name=name,
                                                      id_type=id_type, id_number=id_number, photo=photo)
             return redirect('register_success')
     else:
