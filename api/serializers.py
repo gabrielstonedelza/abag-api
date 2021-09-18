@@ -94,7 +94,7 @@ class FraudSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fraud
-        fields = ['id', 'agent', 'agent_code', 'name', 'phone', 'reason', 'date_added']
+        fields = ['id', 'agent', 'agent_code', 'agent_display_code', 'name', 'phone', 'reason', 'date_added']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
