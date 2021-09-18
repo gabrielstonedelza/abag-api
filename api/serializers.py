@@ -23,7 +23,8 @@ class AgencyBankingDepositSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AgencyBankingDeposit
-        fields = ['id', 'agent', 'agent_code', 'bank', 'beneficiary_account_number', 'beneficiary_name', 'depositor_number', 'depositor_id_type', 'depositor_id_number', 'amount',
+        fields = ['id', 'agent', 'agent_code', 'bank', 'beneficiary_account_number', 'beneficiary_name',
+                  'depositor_number', 'depositor_id_type', 'depositor_id_number', 'amount',
                   'date_deposited']
         read_only_fields = ['agent']
 
@@ -64,7 +65,8 @@ class MobileMoneyDepositSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MobileMoneyDeposit
-        fields = ['id', 'agent', 'agent_code', 'network', 'beneficiary_phone', 'beneficiary_name', 'depositor_phone', 'depositor_id_type', 'depositor_number', 'amount',
+        fields = ['id', 'agent', 'agent_code', 'network', 'beneficiary_phone', 'beneficiary_name', 'depositor_phone',
+                  'depositor_id_type', 'depositor_number', 'amount',
                   'date_deposited', ]
         read_only_fields = ['agent']
 
@@ -88,6 +90,7 @@ class MobileMoneyWithDrawSerializer(serializers.ModelSerializer):
 
 class FraudSerializer(serializers.ModelSerializer):
     agent_code = serializers.SerializerMethodField('get_agent_code')
+    agent_display_code = serializers.SerializerMethodField('get_agent_display_code')
 
     class Meta:
         model = Fraud
@@ -97,6 +100,10 @@ class FraudSerializer(serializers.ModelSerializer):
     def get_agent_code(self, mm_user):
         agent_code = mm_user.agent.agent_code
         return agent_code
+
+    def get_agent_display_code(self, mm_user):
+        agent_display_code = mm_user.agent.agent_display_code
+        return agent_display_code
 
 
 class MomoPaySerializer(serializers.ModelSerializer):
