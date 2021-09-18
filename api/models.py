@@ -59,8 +59,8 @@ class AgencyBankingDeposit(models.Model):
     beneficiary_account_number = models.CharField(max_length=15)
     beneficiary_name = models.CharField(max_length=100)
     depositor_number = models.CharField(max_length=15)
-    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE)
-    depositor_id_number = models.CharField(max_length=16)
+    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True, default="")
+    depositor_id_number = models.CharField(max_length=16, blank=True)
     amount = models.FloatField()
     date_deposited = models.DateTimeField(auto_now_add=True)
 
@@ -107,7 +107,7 @@ class MobileMoneyDeposit(models.Model):
     beneficiary_phone = models.CharField(max_length=15)
     beneficiary_name = models.CharField(max_length=100)
     depositor_phone = models.CharField(max_length=15)
-    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True)
+    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True, default="")
     depositor_number = models.CharField(max_length=16, blank=True)
     amount = models.FloatField()
     date_deposited = models.DateTimeField(auto_now_add=True)
@@ -130,7 +130,7 @@ class MobileMoneyWithDraw(models.Model):
 class Fraud(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15, unique=True)
     reason = models.TextField()
     date_added = models.DateTimeField(default=timezone.now)
 
