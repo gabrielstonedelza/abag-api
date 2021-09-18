@@ -12,6 +12,7 @@ NETWORK = (
 )
 
 IDTYPE = (
+    ("None", "None"),
     ("Passport", "Passport"),
     ("Voters Id", "Voters Id"),
     ("Health Insurance", "Health Insurance"),
@@ -107,7 +108,7 @@ class MobileMoneyDeposit(models.Model):
     beneficiary_phone = models.CharField(max_length=15)
     beneficiary_name = models.CharField(max_length=100)
     depositor_phone = models.CharField(max_length=15)
-    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True, default="")
+    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True, default="None")
     depositor_number = models.CharField(max_length=16, blank=True)
     amount = models.FloatField()
     date_deposited = models.DateTimeField(auto_now_add=True)
