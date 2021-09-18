@@ -148,15 +148,6 @@ EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework.authentication.TokenAuthentication',
-    # ),
-}
-
 AUTH_USER_MODEL = 'users.User'
 DJOSER = {
     'LOGIN_FIELD': 'agent_code',

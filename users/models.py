@@ -23,71 +23,52 @@ LOCAL_REGIONS = (
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
-    agent_code = models.CharField(max_length=11, unique=True)
+    agent_code = models.CharField(max_length=6, unique=True)
     phone = models.CharField(max_length=15, unique=True)
     company_name = models.CharField(max_length=200)
     full_name = models.CharField(max_length=150, default="Abag User")
     region = models.CharField(max_length=50)
-    regional_code = models.CharField(max_length=2, blank=True)
+    regional_code = models.CharField(max_length=20, blank=True)
     agent_display_code = models.CharField(max_length=200, blank=True)
-    REQUIRED_FIELDS = ['username', 'email', 'phone', 'company_name', 'full_name']
+    REQUIRED_FIELDS = ['username', 'email', 'phone', 'company_name', 'full_name', 'region']
     USERNAME_FIELD = 'agent_code'
 
     def get_agent_code(self):
         return self.agent_code
 
     def save(self, *args, **kwargs):
-        acode = 0
-        grcode = 0
-        bacode = 0
-        nrcode = 0
-        crcode = 0
-        uecode = 0
-        uwcode = 0
-        ercode = 0
-        vrcode = 0
-        wrcode = 0
+
         r_code = ""
         if self.region == "Ashanti":
-            acode += 1
-            r_code = "0000A"
-            self.agent_display_code = r_code + str(acode)
+            r_code = "A"
+            self.agent_display_code = r_code + self.agent_code
         if self.region == "Greater Accra":
-            grcode += 1
-            r_code = "0000GR"
-            self.agent_display_code = r_code + str(grcode)
+            r_code = "GR"
+            self.agent_display_code = r_code + self.agent_code
         if self.region == "Brong-Ahafo":
-            bacode += 1
-            r_code = "0000BA"
-            self.agent_code = r_code + str(bacode)
+            r_code = "BA"
+            self.agent_code = r_code + self.agent_code
         if self.region == "Northern":
-            nrcode += 1
-            r_code = "0000NR"
-            self.agent_code = r_code + str(nrcode)
+            r_code = "NR"
+            self.agent_code = r_code + self.agent_code
         if self.region == "Central":
-            crcode += 1
-            r_code = "0000CR"
-            self.agent_code = r_code + str(crcode)
+            r_code = "CR"
+            self.agent_code = r_code + self.agent_code
         if self.region == "Upper East":
-            uecode += 1
-            r_code = "0000UE"
-            self.agent_code = r_code + str(uecode)
+            r_code = "UE"
+            self.agent_code = r_code + self.agent_code
         if self.region == "Upper West":
-            uwcode += 1
-            r_code = "0000UW"
-            self.agent_code = r_code + str(uwcode)
+            r_code = "UW"
+            self.agent_code = r_code + self.agent_code
         if self.region == "Eastern":
-            ercode += 1
-            r_code = "0000ER"
-            self.agent_code = r_code + str(ercode)
+            r_code = "ER"
+            self.agent_code = r_code + self.agent_code
         if self.region == "Volta":
-            vrcode += 1
-            r_code = "0000VR"
-            self.agent_code = r_code + str(vrcode)
+            r_code = "VR"
+            self.agent_code = r_code + self.agent_code
         if self.region == "Western":
-            wrcode += 1
-            r_code = "0000WR"
-            self.agent_code = r_code + str(wrcode)
+            r_code = "WR"
+            self.agent_code = r_code + self.agent_code
 
         self.regional_code = r_code
 
