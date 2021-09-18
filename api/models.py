@@ -21,29 +21,12 @@ IDTYPE = (
 )
 
 BANKS = (
-    ("Absa", "Absa"),
     ("Access Bank", "Access Bank"),
-    ("ADB", "ADB"),
-    ("Bank of Africa", "Bank of Africa"),
     ("Cal Bank", "Cal Bank"),
-    ("Consolidated Bank Ghana", "Consolidated Bank Ghana"),
     ("Fidelity Bank", "Fidelity Bank"),
     ("Ecobank", "Ecobank"),
-    ("First Atlantic Bank", "First Atlantic Bank"),
     ("First Bank of Nigeria", "First Bank of Nigeria"),
-    ("GCB Bank Ltd", "GCB Bank Ltd"),
-    ("GHL Bank Ltd", "GHL Bank Ltd"),
-    ("GT Bank", "GT Bank"),
-    ("National Investment Bank", "National Investment Bank"),
-    ("Prudential Bank", "Prudential Bank"),
-    ("Republic Bank Limited", "Republic Bank Limited"),
-    ("Sahel Sahara Bank", "Sahel Sahara Bank"),
-    ("Societe General Ghana Ltd", "Societe General Ghana Ltd"),
-    ("Stanbic Bank", "Stanbic Bank"),
-    ("Standard Chartered Bank", "Standard Chartered Bank"),
-    ("United Bank Of Africa", "United Bank Of Africa"),
-    ("Universal Merchant Bank", "Universal Merchant Bank"),
-    ("Zenith bank", "Zenith bank"),
+    ("SGSSB", "SGSSB")
 )
 
 
@@ -124,8 +107,8 @@ class MobileMoneyDeposit(models.Model):
     beneficiary_phone = models.CharField(max_length=15)
     beneficiary_name = models.CharField(max_length=100)
     depositor_phone = models.CharField(max_length=15)
-    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE)
-    depositor_number = models.CharField(max_length=16)
+    depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True)
+    depositor_number = models.CharField(max_length=16, blank=True)
     amount = models.FloatField()
     date_deposited = models.DateTimeField(auto_now_add=True)
 
