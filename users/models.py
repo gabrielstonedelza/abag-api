@@ -24,7 +24,7 @@ LOCAL_REGIONS = (
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
     agent_code = models.CharField(max_length=6, unique=True)
-    phone = models.CharField(max_length=15, unique=True)
+    phone = models.CharField(max_length=15, unique=True, help_text="please format should be +233")
     company_name = models.CharField(max_length=200)
     full_name = models.CharField(max_length=150, default="Abag User")
     region = models.CharField(max_length=50)

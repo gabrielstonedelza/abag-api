@@ -6,7 +6,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path("myprofile/<str:agent_code>/", views.profile),
-    path("agents/", views.agents),
+    path("agents/", views.AllAgents.as_view()),
     path("profile_update/<str:agent_code>/", views.profile_update),
     path('check-auth-phone/<str:agent_code>/', views.check_auth_phone),
     path('add-auth-phone/<str:agent_code>/', views.add_agent_auth_phone),
