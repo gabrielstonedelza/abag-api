@@ -25,7 +25,7 @@ def profile_update(request, agent_code):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def check_auth_phone(request, agent_code):
     if request.method == 'GET':
         agent = get_object_or_404(User, agent_code=agent_code)
@@ -33,11 +33,14 @@ def check_auth_phone(request, agent_code):
         serializer = AuthenticatedPhoneAddressSerializer(auth_phone, many=True)
         return Response(serializer.data)
 
-    elif request.method == "POST":
-        agent = get_object_or_404(User, agent_code=agent_code)
-        serializer = AuthenticatedPhoneAddressSerializer(data=request.data)
+
+@api_view(['POST'])
+def add_agent_auth_phone(request, agent_code):
+    agent = get_object_or_404(User, agent_code=agent_code)
+    serializer = AuthenticatedPhoneAddressSerializer(data=request.data)
+    if not AuthenticatedPhoneAddress.objects.filter(agent=agent).exists():
         if serializer.is_valid():
-            if not AuthenticatedPhoneAddress.objects.filter(agent=agent).exists():
-                serializer.save(agent=agent, authenticated_phone=True)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            serializer.save(agent=agent, authenticated_phone=True)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"Agent: Agent with this code has already been authenticated"})
