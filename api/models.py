@@ -62,7 +62,7 @@ class AgencyBankingDeposit(models.Model):
     depositor_number = models.CharField(max_length=15)
     depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True, default="")
     depositor_id_number = models.CharField(max_length=16, blank=True)
-    amount = models.FloatField()
+    amount = models.CharField(max_length=500)
     date_deposited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -73,7 +73,7 @@ class AgencyBankingWithDraw(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     bank = models.CharField(max_length=100, choices=BANKS)
     account_number = models.CharField(max_length=15)
-    amount = models.FloatField()
+    amount = models.CharField(max_length=500)
     date_withdrew = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -110,7 +110,7 @@ class MobileMoneyDeposit(models.Model):
     depositor_phone = models.CharField(max_length=15)
     depositor_id_type = models.CharField(max_length=100, choices=IDTYPE, blank=True, default="None")
     depositor_number = models.CharField(max_length=16, blank=True)
-    amount = models.FloatField()
+    amount = models.CharField(max_length=500)
     date_deposited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -121,7 +121,7 @@ class MobileMoneyWithDraw(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     network = models.CharField(max_length=11, choices=NETWORK)
     phone = models.CharField(max_length=15)
-    amount = models.FloatField()
+    amount = models.CharField(max_length=500)
     date_withdrew = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -143,7 +143,7 @@ class MomoPay(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
     network = models.CharField(max_length=100, choices=NETWORK)
     phone = models.CharField(max_length=15)
-    amount = models.IntegerField()
+    amount = models.CharField(max_length=500)
     date_added = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
