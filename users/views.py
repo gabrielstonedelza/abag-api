@@ -27,11 +27,10 @@ def profile_update(request, agent_code):
 
 @api_view(['GET'])
 def check_auth_phone(request, agent_code):
-    if request.method == 'GET':
-        agent = get_object_or_404(User, agent_code=agent_code)
-        auth_phone = AuthenticatedPhoneAddress.objects.filter(agent=agent)
-        serializer = AuthenticatedPhoneAddressSerializer(auth_phone, many=True)
-        return Response(serializer.data)
+    agent = get_object_or_404(User, agent_code=agent_code)
+    auth_phone = AuthenticatedPhoneAddress.objects.filter(agent=agent)
+    serializer = AuthenticatedPhoneAddressSerializer(auth_phone, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])
