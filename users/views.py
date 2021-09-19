@@ -7,6 +7,13 @@ from django.shortcuts import get_object_or_404
 
 
 @api_view(['GET'])
+def agents(request):
+    all_agents = User.objects.all().order_by('-date_joined')
+    serializer = UsersSerializer(all_agents, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def profile(request, agent_code):
     agent = User.objects.get(agent_code=agent_code)
     serializer = UsersSerializer(agent, many=False)
