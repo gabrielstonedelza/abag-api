@@ -1,5 +1,5 @@
-from .serializers import UsersSerializer
-from .models import User
+from .serializers import UsersSerializer, AuthenticatedPhoneAddressSerializer
+from .models import User, AuthenticatedPhoneAddress
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -23,3 +23,21 @@ def profile_update(request, agent_code):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
+def check_auth_phone(request, agent_code):
+    if request.method == 'GET':
+        agent = get_object_or_404(User, agent_code=agent_code)
+        auth_phone = AuthenticatedPhoneAddress.objects.filter(agent=agent)
+        serializer = AuthenticatedPhoneAddressSerializer(auth_phone, many=True)
+        return Response(serializer.data)
+
+    elif request.method == "POST":
+        agent = get_object_or_404(User, agent_code=agent_code)
+        serializer = AuthenticatedPhoneAddressSerializer(data=request.data)
+        if serializer.is_valid():
+            if not AuthenticatedPhoneAddress.objects.filter(agent=agent).exists():
+                serializer.save(agent=agent, authenticated_phone=True)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

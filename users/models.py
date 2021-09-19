@@ -99,7 +99,8 @@ class AgentsReBalancing(models.Model):
 
 class AuthenticatedPhoneAddress(models.Model):
     agent = models.ForeignKey(User, on_delete=models.CASCADE)
-    phone_mac_address = models.CharField(max_length=100)
+    phone_mac_address = models.CharField(max_length=100, unique=True)
+    authenticated_phone = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
