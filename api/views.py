@@ -146,56 +146,6 @@ def abag_home(request):
     return render(request, "users/abag_home.html")
 
 
-def mobile_money_registration(request, agent_code):
-    agent = User.objects.get(agent_code=agent_code)
-    if request.method == "POST":
-        form = MobileMoneyForm(request.POST, request.FILES)
-        if form.is_valid():
-            network = form.cleaned_data.get('network')
-            phone = form.cleaned_data.get('phone')
-            name = form.cleaned_data.get('name')
-            id_type = form.cleaned_data.get('id_type')
-            id_number = form.cleaned_data.get('id_number')
-            photo = form.cleaned_data.get('photo')
-            MobileMoneyUsersRegistration.objects.create(agent=agent, network=network, phone=phone, name=name,
-                                                        id_type=id_type, id_number=id_number, photo=photo)
-            return redirect('register_success')
-    else:
-        form = MobileMoneyForm()
-
-    context = {
-        "form": form
-    }
-
-    return render(request, "users/mm_registration.html", context)
-
-
-def agency_banking_registration(request, agent_code):
-    agent = User.objects.get(agent_code=agent_code)
-    if request.method == "POST":
-        form = AgencyBankingForm(request.POST, request.FILES)
-        if form.is_valid():
-            bank = form.cleaned_data.get('bank')
-            account_number = form.cleaned_data.get('account_number')
-            phone = form.cleaned_data.get('phone')
-            name = form.cleaned_data.get('name')
-            id_type = form.cleaned_data.get('id_type')
-            id_number = form.cleaned_data.get('id_number')
-            photo = form.cleaned_data.get('photo')
-            AgencyBankingRegistration.objects.create(agent=agent, bank=bank, account_number=account_number, phone=phone,
-                                                     name=name,
-                                                     id_type=id_type, id_number=id_number, photo=photo)
-            return redirect('register_success')
-    else:
-        form = AgencyBankingForm()
-
-    context = {
-        "form": form
-    }
-
-    return render(request, "users/agency_registration.html", context)
-
-
 def register_success(request):
     return render(request, "users/register_success.html")
 
