@@ -34,14 +34,24 @@ def get_agency_account(request, account_number):
     return Response(serializer.data)
 
 
-# @api_view(['POST'])
-# def agency_banking_registration(request, agent_code):
-#     agent = User.objects.get(agent_code=agent_code)
-#     serializer = AgencyBankingSerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save(agent=agent)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['POST'])
+def agency_banking_registration(request, agent_code):
+    agent = User.objects.get(agent_code=agent_code)
+    serializer = AgencyBankingSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(agent=agent)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def momo_registration(request, agent_code):
+    agent = User.objects.get(agent_code=agent_code)
+    serializer = MobileMoneyRegistrationSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(agent=agent)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -172,7 +182,8 @@ def agency_banking_registration(request, agent_code):
             id_type = form.cleaned_data.get('id_type')
             id_number = form.cleaned_data.get('id_number')
             photo = form.cleaned_data.get('photo')
-            AgencyBankingRegistration.objects.create(agent=agent, bank=bank, account_number=account_number, phone=phone, name=name,
+            AgencyBankingRegistration.objects.create(agent=agent, bank=bank, account_number=account_number, phone=phone,
+                                                     name=name,
                                                      id_type=id_type, id_number=id_number, photo=photo)
             return redirect('register_success')
     else:
