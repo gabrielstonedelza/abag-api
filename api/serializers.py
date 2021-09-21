@@ -91,10 +91,11 @@ class MobileMoneyWithDrawSerializer(serializers.ModelSerializer):
 class FraudSerializer(serializers.ModelSerializer):
     agent_code = serializers.SerializerMethodField('get_agent_code')
     agent_display_code = serializers.SerializerMethodField('get_agent_display_code')
+    agent_phone = serializers.SerializerMethodField('get_agent_phone')
 
     class Meta:
         model = Fraud
-        fields = ['id', 'agent', 'agent_code', 'agent_display_code', 'name', 'phone', 'reason', 'date_added']
+        fields = ['id', 'agent', 'agent_code', 'agent_phone', 'agent_display_code', 'name', 'phone', 'reason', 'date_added']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
@@ -104,6 +105,10 @@ class FraudSerializer(serializers.ModelSerializer):
     def get_agent_display_code(self, mm_user):
         agent_display_code = mm_user.agent.agent_display_code
         return agent_display_code
+
+    def get_agent_phone(self, mm_user):
+        agent_phone = mm_user.agent.phone
+        return agent_phone
 
 
 class MomoPaySerializer(serializers.ModelSerializer):
