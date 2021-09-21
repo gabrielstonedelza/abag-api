@@ -45,10 +45,6 @@ class AgencyBankingRegistration(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        self.phone = self.phone[1:]
-        super().save(*args, **kwargs)
-
     def get_photo(self):
         if self.photo:
             return "https://www.africanbankersassociationofghana.xyz" + self.photo.url
@@ -92,10 +88,6 @@ class MobileMoneyUsersRegistration(models.Model):
 
     def __str__(self):
         return self.name
-
-    def save(self, *args, **kwargs):
-        self.phone = self.phone[1:]
-        super().save(*args, **kwargs)
 
     def get_photo(self):
         if self.photo:
