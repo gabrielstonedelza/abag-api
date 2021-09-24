@@ -144,7 +144,7 @@ class AgentAccountsCompletedSerializer(serializers.ModelSerializer):
     agent_code = serializers.SerializerMethodField('get_agent_code')
 
     class Meta:
-        model = AgentsAccountsStartedWith
+        model = AgentsAccountsCompletedWith
         fields = ['id', 'agent', 'agent_code', 'mtn_physical', 'mtn_eCash', 'vodafone_physical', 'vodafone_eCash',
                   'airtel_tigo_physical', 'airtel_tigo_eCash', 'ecobank_physical', 'ecobank_eCash', 'calbank_physical',
                   'calbank_eCash', 'fidelity_physical', 'fidelity_eCash', 'physical_sum', 'ecash_sum', 'date_closed']
