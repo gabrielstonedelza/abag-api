@@ -38,7 +38,10 @@ urlpatterns = [
     path('agency-banking-deposit-summary/<str:agent_code>/', views.agent_agency_banking_deposits),
     path('agency-banking-withdraws-summary/<str:agent_code>/', views.agent_agency_banking_withdraws),
 
-    # chat messages
-    path('chat/<str:message_id>/', views.get_chat_messages),
-    path('create_chat/', views.create_chat)
+    # agents accounts started and completed with
+    path('agents_accounts_started_with/<str:agent_code>/', views.agent_accounts_started),
+    path('agents_accounts_completed_with/<str:agent_code>/', views.agent_accounts_completed),
+    path('agents_accounts_started_with/<str:agent_code>/lists/', views.agent_accounts_started_lists),
+    path('agents_accounts_completed_with/<str:agent_code>/lists/', views.agent_accounts_completed_lists),
+
 ]

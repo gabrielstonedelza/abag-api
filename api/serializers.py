@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import (MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw, AgencyBankingRegistration,
-                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, ChatMessage)
-from users.models import User
+                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, AgentsAccountsStartedWith,
+                     AgentsAccountsCompletedWith)
 
 
 class AgencyBankingSerializer(serializers.ModelSerializer):
@@ -95,7 +95,8 @@ class FraudSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fraud
-        fields = ['id', 'agent', 'agent_code', 'agent_phone', 'agent_display_code', 'name', 'phone', 'reason', 'date_added']
+        fields = ['id', 'agent', 'agent_code', 'agent_phone', 'agent_display_code', 'name', 'phone', 'reason',
+                  'date_added']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
@@ -124,19 +125,31 @@ class MomoPaySerializer(serializers.ModelSerializer):
         return agent_code
 
 
-class ChatMessageSerializer(serializers.ModelSerializer):
-    sender_username = serializers.SerializerMethodField('get_sender_username')
-    receiver_username = serializers.SerializerMethodField('get_sender_username')
+class AgentAccountsStartedSerializer(serializers.ModelSerializer):
+    agent_code = serializers.SerializerMethodField('get_agent_code')
 
     class Meta:
-        model = ChatMessage
-        fields = ['id', 'agent', 'sender', 'receiver', 'sender_username', 'receiver_username', 'message_id', 'message']
-        read_only_fields = ['agent', 'message_id']
+        model = AgentsAccountsStartedWith
+        fields = ['id', 'agent', 'agent_code', 'mtn_physical', 'mtn_eCash', 'vodafone_physical', 'vodafone_eCash',
+                  'airtel_tigo_physical', 'airtel_tigo_eCash', 'ecobank_physical', 'ecobank_eCash', 'calbank_physical',
+                  'calbank_eCash', 'fidelity_physical', 'fidelity_eCash', 'physical_sum', 'ecash_sum', 'date_started']
+        read_only_fields = ['agent']
 
-    def get_sender_username(self, user):
-        sender_username = user.sender.username
-        return sender_username
+    def get_agent_code(self, mm_user):
+        agent_code = mm_user.agent.agent_code
+        return agent_code
 
-    def get_receiver_username(self, user):
-        receiver_username = user.receiver.username
-        return receiver_username
+
+class AgentAccountsCompletedSerializer(serializers.ModelSerializer):
+    agent_code = serializers.SerializerMethodField('get_agent_code')
+
+    class Meta:
+        model = AgentsAccountsStartedWith
+        fields = ['id', 'agent', 'agent_code', 'mtn_physical', 'mtn_eCash', 'vodafone_physical', 'vodafone_eCash',
+                  'airtel_tigo_physical', 'airtel_tigo_eCash', 'ecobank_physical', 'ecobank_eCash', 'calbank_physical',
+                  'calbank_eCash', 'fidelity_physical', 'fidelity_eCash', 'physical_sum', 'ecash_sum', 'date_closed']
+        read_only_fields = ['agent']
+
+    def get_agent_code(self, mm_user):
+        agent_code = mm_user.agent.agent_code
+        return agent_code

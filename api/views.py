@@ -1,14 +1,15 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .serializers import (MobileMoneyRegistrationSerializer, MobileMoneyDepositSerializer,
                           MobileMoneyWithDrawSerializer, AgencyBankingSerializer, AgencyBankingDepositSerializer,
-                          AgencyBankingWithDrawSerializer, FraudSerializer, MomoPaySerializer, ChatMessageSerializer)
+                          AgencyBankingWithDrawSerializer, FraudSerializer, MomoPaySerializer,
+                          AgentAccountsStartedSerializer, AgentAccountsCompletedSerializer)
 from .models import (MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw, AgencyBankingRegistration,
-                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, ChatMessage)
+                     AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, AgentsAccountsStartedWith,
+                     AgentsAccountsCompletedWith)
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from users.models import User
-from users.forms import MobileMoneyForm, AgencyBankingForm
 from users.serializers import UsersSerializer
 import random
 
@@ -211,21 +212,37 @@ def agent_agency_banking_withdraws(request, agent_code):
     return Response(serializer.data)
 
 
-# chat message
-@api_view(['GET'])
-def get_chat_messages(request, message_id):
-    msg_id = ChatMessage.objects.filter(message_id=message_id).order_by('-date_messaged')
-    serializer = ChatMessageSerializer(msg_id, many=True)
-    return Response(serializer.data)
+@api_view(['POST'])
+def agent_accounts_started(request, agent_code):
+    agent = User.objects.get(agent_code=agent_code)
+    serializer = AgentAccountsStartedSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(agent=agent)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
-def create_chat(request):
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i''j', 'k', 'l']
-    serializer = ChatMessageSerializer(data=request.data)
-    gen_code = random.randint(1, 1001)
-    msgi_code = random.choice(letters) + str(gen_code)
+def agent_accounts_completed(request, agent_code):
+    agent = User.objects.get(agent_code=agent_code)
+    serializer = AgentAccountsCompletedSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(agent=request.user, message_id=msgi_code)
+        serializer.save(agent=agent)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def agent_accounts_started_lists(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = AgentsAccountsStartedWith.objects.filter(agent=user)
+    serializer = AgentAccountsStartedSerializer(agent, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def agent_accounts_completed_lists(request, agent_code):
+    user = get_object_or_404(User, agent_code=agent_code)
+    agent = AgentsAccountsCompletedWith.objects.filter(agent=user)
+    serializer = AgentAccountsCompletedSerializer(agent, many=True)
+    return Response(serializer.data)

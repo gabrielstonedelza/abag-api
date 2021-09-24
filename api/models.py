@@ -142,12 +142,53 @@ class MomoPay(models.Model):
         return self.phone
 
 
-class ChatMessage(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender", null=True)
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver", null=True)
-    message_id = models.CharField(max_length=20)
-    message = models.TextField()
-    date_messaged = models.DateTimeField(auto_now_add=True)
+class AgentsAccountsStartedWith(models.Model):
+    agent = models.ForeignKey(User, on_delete=models.CASCADE)
+    mtn_physical = models.IntegerField()
+    mtn_eCash = models.IntegerField()
+    vodafone_physical = models.IntegerField()
+    vodafone_eCash = models.IntegerField()
+    airtel_tigo_physical = models.IntegerField()
+    airtel_tigo_eCash = models.IntegerField()
+    ecobank_physical = models.IntegerField()
+    ecobank_eCash = models.IntegerField()
+    calbank_physical = models.IntegerField()
+    calbank_eCash = models.IntegerField()
+    fidelity_physical = models.IntegerField()
+    fidelity_eCash = models.IntegerField()
+    date_started = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.message
+        return f"{self.agent.agent_code} has started accounts today"
+
+    def physical_sum(self):
+        return self.mtn_physical + self.vodafone_physical + self.airtel_tigo_physical + self.ecobank_physical + self.calbank_physical + self.fidelity_physical
+
+    def ecash_sum(self):
+        return self.mtn_eCash + self.vodafone_eCash + self.airtel_tigo_eCash + self.ecobank_eCash + self.calbank_eCash + self.fidelity_eCash
+
+
+class AgentsAccountsCompletedWith(models.Model):
+    agent = models.ForeignKey(User, on_delete=models.CASCADE)
+    mtn_physical = models.IntegerField()
+    mtn_eCash = models.IntegerField()
+    vodafone_physical = models.IntegerField()
+    vodafone_eCash = models.IntegerField()
+    airtel_tigo_physical = models.IntegerField()
+    airtel_tigo_eCash = models.IntegerField()
+    ecobank_physical = models.IntegerField()
+    ecobank_eCash = models.IntegerField()
+    calbank_physical = models.IntegerField()
+    calbank_eCash = models.IntegerField()
+    fidelity_physical = models.IntegerField()
+    fidelity_eCash = models.IntegerField()
+    date_closed = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.agent.agent_code} has ended accounts today"
+
+    def physical_sum(self):
+        return self.mtn_physical + self.vodafone_physical + self.airtel_tigo_physical + self.ecobank_physical + self.calbank_physical + self.fidelity_physical
+
+    def ecash_sum(self):
+        return self.mtn_eCash + self.vodafone_eCash + self.airtel_tigo_eCash + self.ecobank_eCash + self.calbank_eCash + self.fidelity_eCash
