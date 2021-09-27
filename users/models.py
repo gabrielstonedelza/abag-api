@@ -40,7 +40,7 @@ class User(AbstractUser):
 
         r_code = ""
         if self.region == "Ashanti":
-            r_code = "A"
+            r_code = "AS"
             self.agent_display_code = r_code + self.agent_code
         if self.region == "Greater Accra":
             r_code = "GR"
