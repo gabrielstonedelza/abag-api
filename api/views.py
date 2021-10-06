@@ -235,14 +235,14 @@ def agent_accounts_completed(request, agent_code):
 @api_view(['GET'])
 def agent_accounts_started_lists(request, agent_code):
     user = get_object_or_404(User, agent_code=agent_code)
-    agent = AgentsAccountsStartedWith.objects.filter(agent=user).order_by('-date_started')[0]
-    serializer = AgentAccountsStartedSerializer(agent, many=True)
+    agent_accounts = AgentsAccountsStartedWith.objects.filter(agent=user).order_by('-date_started')
+    serializer = AgentAccountsStartedSerializer(agent_accounts, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
 def agent_accounts_completed_lists(request, agent_code):
     user = get_object_or_404(User, agent_code=agent_code)
-    agent = AgentsAccountsCompletedWith.objects.filter(agent=user).order_by('-date_closed')[0]
-    serializer = AgentAccountsCompletedSerializer(agent, many=True)
+    agent_accounts = AgentsAccountsCompletedWith.objects.filter(agent=user).order_by('-date_closed')
+    serializer = AgentAccountsCompletedSerializer(agent_accounts, many=True)
     return Response(serializer.data)
