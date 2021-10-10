@@ -1,5 +1,4 @@
 from django.db import models
-from PIL import Image
 from django.conf import settings
 from django.utils import timezone
 

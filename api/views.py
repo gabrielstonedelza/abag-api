@@ -11,7 +11,6 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from users.models import User
 from users.serializers import UsersSerializer
-import random
 
 
 @api_view(['GET'])
@@ -151,8 +150,7 @@ def register_success(request):
     return render(request, "users/register_success.html")
 
 
-# agent mobile money transactions
-
+# agent mobile money transaction
 
 @api_view(['GET'])
 def agent_momo_registrations(request, agent_code):
