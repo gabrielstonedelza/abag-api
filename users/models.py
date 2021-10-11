@@ -27,7 +27,7 @@ class User(AbstractUser):
     phone = models.CharField(max_length=15, unique=True, help_text="please format should be +233")
     company_name = models.CharField(max_length=200)
     full_name = models.CharField(max_length=150, default="Abag User")
-    region = models.CharField(max_length=50)
+    region = models.CharField(max_length=50, choices=LOCAL_REGIONS)
     regional_code = models.CharField(max_length=20, blank=True)
     agent_display_code = models.CharField(max_length=200, blank=True)
     REQUIRED_FIELDS = ['username', 'email', 'phone', 'company_name', 'full_name', 'region']
