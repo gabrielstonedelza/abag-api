@@ -130,9 +130,9 @@ class AgentAccountsStartedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AgentsAccountsStartedWith
-        fields = ['id', 'agent', 'agent_code', 'mtn_physical', 'mtn_eCash', 'vodafone_physical', 'vodafone_eCash',
-                  'airtel_tigo_physical', 'airtel_tigo_eCash', 'ecobank_physical', 'ecobank_eCash', 'calbank_physical',
-                  'calbank_eCash', 'fidelity_physical', 'fidelity_eCash', 'physical_sum', 'ecash_sum', 'date_started']
+        fields = ['id', 'agent', 'agent_code', 'physical_cash', 'mtn_eCash', 'vodafone_eCash',
+                  'airtel_tigo_eCash', 'ecobank_eCash',
+                  'calbank_eCash', 'fidelity_eCash', 'ecash_sum', 'date_started']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
@@ -145,9 +145,9 @@ class AgentAccountsCompletedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AgentsAccountsCompletedWith
-        fields = ['id', 'agent', 'agent_code', 'mtn_physical', 'mtn_eCash', 'vodafone_physical', 'vodafone_eCash',
-                  'airtel_tigo_physical', 'airtel_tigo_eCash', 'ecobank_physical', 'ecobank_eCash', 'calbank_physical',
-                  'calbank_eCash', 'fidelity_physical', 'fidelity_eCash', 'physical_sum', 'ecash_sum', 'date_closed']
+        fields = ['id', 'agent', 'agent_code', 'physical_cash', 'mtn_eCash', 'vodafone_eCash',
+                  'airtel_tigo_eCash', 'ecobank_eCash',
+                  'calbank_eCash', 'fidelity_eCash', 'ecash_sum', 'date_closed']
         read_only_fields = ['agent']
 
     def get_agent_code(self, mm_user):
