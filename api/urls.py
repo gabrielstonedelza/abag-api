@@ -43,5 +43,6 @@ urlpatterns = [
     path('agents_accounts_completed_with/<str:agent_code>/', views.agent_accounts_completed),
     path('agents_accounts_started_with/<str:agent_code>/lists/', views.agent_accounts_started_lists),
     path('agents_accounts_completed_with/<str:agent_code>/lists/', views.agent_accounts_completed_lists),
+    path('agents_accounts_started_with_update/<str:agent_code>/<int:id>/', views.account_update)
 
 ]

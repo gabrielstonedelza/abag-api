@@ -244,3 +244,14 @@ def agent_accounts_completed_lists(request, agent_code):
     agent_accounts = AgentsAccountsCompletedWith.objects.filter(agent=user).order_by('-date_closed')
     serializer = AgentAccountsCompletedSerializer(agent_accounts, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET', 'PUT'])
+def account_update(request,agent_code,id):
+    user = get_object_or_404(User, agent_code=agent_code)
+    account_started = get_object_or_404(AgentsAccountsStartedWith, id=id)
+    serializer = AgentAccountsStartedSerializer(account_started,data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
