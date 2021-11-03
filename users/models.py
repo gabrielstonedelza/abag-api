@@ -23,52 +23,52 @@ LOCAL_REGIONS = (
 
 class User(AbstractUser):
     email = models.EmailField(unique=True, max_length=255)
-    agent_code = models.CharField(max_length=6, unique=True)
+
     phone = models.CharField(max_length=15, unique=True, help_text="please format should be +233")
     company_name = models.CharField(max_length=200)
     full_name = models.CharField(max_length=150, default="Abag User")
     region = models.CharField(max_length=50, choices=LOCAL_REGIONS)
     regional_code = models.CharField(max_length=20, blank=True)
     agent_display_code = models.CharField(max_length=200, blank=True)
-    REQUIRED_FIELDS = ['username', 'email', 'phone', 'company_name', 'full_name', 'region']
-    USERNAME_FIELD = 'agent_code'
+    REQUIRED_FIELDS = ['email', 'phone', 'company_name', 'full_name', 'region']
+    USERNAME_FIELD = 'username'
 
-    def get_agent_code(self):
-        return self.agent_code
+    def get_username(self):
+        return self.username
 
     def save(self, *args, **kwargs):
 
         r_code = ""
         if self.region == "Ashanti":
             r_code = "AS"
-            self.agent_display_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Greater Accra":
             r_code = "GR"
-            self.agent_display_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Brong-Ahafo":
             r_code = "BA"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Northern":
             r_code = "NR"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Central":
             r_code = "CR"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Upper East":
             r_code = "UE"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Upper West":
             r_code = "UW"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Eastern":
             r_code = "ER"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Volta":
             r_code = "VR"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
         if self.region == "Western":
             r_code = "WR"
-            self.agent_code = r_code + self.agent_code
+            self.agent_display_code = r_code + self.username
 
         self.regional_code = r_code
 

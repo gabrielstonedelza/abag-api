@@ -13,18 +13,18 @@ class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id', 'email', 'agent_code', 'username', 'phone', 'company_name', 'full_name', 'region', 'regional_code',
+            'id', 'email', 'username', 'phone', 'company_name', 'full_name', 'region', 'regional_code',
             'agent_display_code')
 
 
 class AuthenticatedPhoneAddressSerializer(serializers.ModelSerializer):
-    agent_code = serializers.SerializerMethodField('get_agent_code')
+    username = serializers.SerializerMethodField('get_username')
 
     class Meta:
         model = AuthenticatedPhoneAddress
-        fields = ['agent', 'agent_code', 'phone_mac_address', 'authenticated_phone', 'date_added']
+        fields = ['agent', 'username', 'phone_mac_address', 'authenticated_phone', 'date_added']
         read_only_fields = ['agent', 'authenticated_phone']
 
-    def get_agent_code(self, mm_user):
-        agent_code = mm_user.agent.agent_code
-        return agent_code
+    def get_username(self, mm_user):
+        username = mm_user.agent.username
+        return username

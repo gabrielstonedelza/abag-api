@@ -22,17 +22,17 @@ def agents(request):
 
 
 @api_view(['GET'])
-def profile(request, agent_code):
-    agent = User.objects.get(agent_code=agent_code)
+def profile(request, username):
+    agent = User.objects.get(username=username)
     serializer = UsersSerializer(agent, many=False)
     return Response(serializer.data)
 
 
 @api_view(['GET', 'PUT'])
-def profile_update(request, agent_code):
-    user_profile = get_object_or_404(User, agent_code=agent_code)
+def profile_update(request, username):
+    user_profile = get_object_or_404(User, username=username)
     serializer = UsersSerializer(user_profile, data=request.data)
-    if user_profile.agent_code != agent_code:
+    if user_profile.username != username:
         return Response({"User: you are not authorized to edit this profile"})
     if serializer.is_valid():
         serializer.save()
@@ -41,16 +41,16 @@ def profile_update(request, agent_code):
 
 
 @api_view(['GET'])
-def check_auth_phone(request, agent_code):
-    agent = get_object_or_404(User, agent_code=agent_code)
+def check_auth_phone(request, username):
+    agent = get_object_or_404(User, username=username)
     auth_phone = AuthenticatedPhoneAddress.objects.filter(agent=agent)
     serializer = AuthenticatedPhoneAddressSerializer(auth_phone, many=True)
     return Response(serializer.data)
 
 
 @api_view(['POST'])
-def add_agent_auth_phone(request, agent_code):
-    agent = get_object_or_404(User, agent_code=agent_code)
+def add_agent_auth_phone(request, username):
+    agent = get_object_or_404(User, username=username)
     serializer = AuthenticatedPhoneAddressSerializer(data=request.data)
     if not AuthenticatedPhoneAddress.objects.filter(agent=agent).exists():
         if serializer.is_valid():
