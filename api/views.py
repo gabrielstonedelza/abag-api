@@ -2,15 +2,22 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .serializers import (MobileMoneyRegistrationSerializer, MobileMoneyDepositSerializer,
                           MobileMoneyWithDrawSerializer, AgencyBankingSerializer, AgencyBankingDepositSerializer,
                           AgencyBankingWithDrawSerializer, FraudSerializer, MomoPaySerializer,
-                          AgentAccountsStartedSerializer, AgentAccountsCompletedSerializer)
+                          AgentAccountsStartedSerializer, AgentAccountsCompletedSerializer, TwilioSerializer)
 from .models import (MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw, AgencyBankingRegistration,
                      AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, AgentsAccountsStartedWith,
-                     AgentsAccountsCompletedWith)
+                     AgentsAccountsCompletedWith, TwilioApi)
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from users.models import User
 from users.serializers import UsersSerializer
+
+
+@api_view(['GET'])
+def get_twilio(request):
+    twilio_details = TwilioApi.objects.all().order_by('-date_created')
+    serializer = TwilioSerializer(twilio_details, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -244,4 +251,3 @@ def agent_accounts_completed_lists(request, username):
     agent_accounts = AgentsAccountsCompletedWith.objects.filter(agent=user).order_by('-date_closed')
     serializer = AgentAccountsCompletedSerializer(agent_accounts, many=True)
     return Response(serializer.data)
-

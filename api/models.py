@@ -175,3 +175,12 @@ class AgentsAccountsCompletedWith(models.Model):
 
     def ecash_sum(self):
         return self.mtn_eCash + self.vodafone_eCash + self.airtel_tigo_eCash + self.ecobank_eCash + self.calbank_eCash + self.fidelity_eCash
+
+
+class TwilioApi(models.Model):
+    account_sid = models.CharField(max_length=200)
+    twi_auth = models.CharField(max_length=200)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"twilio account added"

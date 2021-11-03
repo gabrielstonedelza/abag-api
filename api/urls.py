@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     # normal request links
     path('', views.abag_home, name='index'),
+    path('twilio_details/', views.get_twilio),
     path('register_success/', views.register_success, name="register_success"),
     # api links
     path('deuser/<str:username>/', views.get_deUser),

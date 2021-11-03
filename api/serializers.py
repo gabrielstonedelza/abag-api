@@ -1,7 +1,13 @@
 from rest_framework import serializers
 from .models import (MobileMoneyUsersRegistration, MobileMoneyDeposit, MobileMoneyWithDraw, AgencyBankingRegistration,
                      AgencyBankingDeposit, AgencyBankingWithDraw, Fraud, MomoPay, AgentsAccountsStartedWith,
-                     AgentsAccountsCompletedWith)
+                     AgentsAccountsCompletedWith, TwilioApi)
+
+
+class TwilioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TwilioApi
+        fields = ['account_sid', 'twi_auth']
 
 
 class AgencyBankingSerializer(serializers.ModelSerializer):
